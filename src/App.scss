@@ -1,0 +1,60 @@
+:root {
+  --black: #1d1d1d;
+  --white: #ffffff;
+  --orange: #e4661e;
+  --orange-light: #f0894e;
+  --pink: #fff0db;
+  --yellow: #f0ad4e;
+  --yellow-light: #ffd25d;
+  --grey: #e5e5e5;
+  --green: #49ab39;
+  --input-border: #c4c4c4;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+
+header {
+  display: flex;
+  justify-content: center;
+  height: 60px;
+  padding: 16px;
+
+  background-color: var( --black);
+
+  &__container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 884px;
+    min-height: 21px;
+
+    color: var(--white);
+  }
+}
+
+
+.banner {
+  background: transparent url('assets/header-img.jpg') no-repeat center;
+  background-size: cover;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 884px;
+    min-height: 220px;
+    margin: 0 auto;
+
+    font-size: 1.1em;
+    color: var(--white);
+  }
+
+  &__logo {
+    margin: 0 0 6px 0;
+  }
+}
