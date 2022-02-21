@@ -27,8 +27,7 @@ function App() {
   ];
 
   const handleChange = (event: any, newValue: any) => {
-    console.log(newValue)
-    setValue(newValue);
+    console.log(newValue);
   };
 
   useEffect(() => {
@@ -69,20 +68,20 @@ function App() {
           aria-label="food tabpanel"
           className="tabs"
         >
-          {
-            cuisines.map((cuisine, i) => <Tab label={cuisine} {...a11yProps(i)} key={i} />)
-          }
+          {cuisines.map((cuisine, i) => (
+            <Tab label={cuisine} {...a11yProps(i)} key={i} />
+          ))}
         </Tabs>
       </Box>
-      <TabPanel value={value} index={0}>
-        Item One
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        Item Two
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        Item Three
-      </TabPanel>
+      {cuisines.map((cuisine, i) => (
+        <TabPanel value={value} index={i} key={i}>
+          {restaurants.map((r: any) => {
+            if (r.cuisines.includes(cuisines[value])) {
+              return r.name;
+            }
+          })}
+        </TabPanel>
+      ))}
     </div>
   );
 }
