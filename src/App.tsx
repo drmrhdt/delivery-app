@@ -1,23 +1,49 @@
-import React from "react";
-import logo from "./assets/logo.svg";
-import "./App.scss";
+import React, { useEffect } from "react";
+
+import axios from "axios";
 
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
+
 import TabPanel from "./components/TabPanel";
+import logo from "./assets/logo.svg";
+import "./App.scss";
 
 function App() {
+  const [restaurants, setRestaurants] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(false);
   const [value, setValue] = React.useState(0);
 
+  const cuisines = [
+    "all",
+    "pizza",
+    "sushi",
+    "vegan",
+    "steak",
+    "asian",
+    "seafood",
+    "pasta",
+  ];
+
   const handleChange = (event: any, newValue: any) => {
+    console.log(newValue)
     setValue(newValue);
   };
 
+  useEffect(() => {
+    setIsLoading(true);
+    const apiUrl = "https://course-react.javascript.ru/api/restaurants";
+    axios.get(apiUrl).then(({ data }) => {
+      setIsLoading(false);
+      setRestaurants(data);
+    });
+  }, []);
+
   const a11yProps = (index: any) => {
     return {
-      id: `simple-tab-${index}`,
-      "aria-controls": `simple-tabpanel-${index}`,
+      id: `food-tab-${index}`,
+      "aria-controls": `food-tabpanel-${index}`,
     };
   };
 
@@ -40,11 +66,12 @@ function App() {
         <Tabs
           value={value}
           onChange={handleChange}
-          aria-label="basic tabs example"
+          aria-label="food tabpanel"
+          className="tabs"
         >
-          <Tab label="Item One" {...a11yProps(0)} />
-          <Tab label="Item Two" {...a11yProps(1)} />
-          <Tab label="Item Three" {...a11yProps(2)} />
+          {
+            cuisines.map((cuisine, i) => <Tab label={cuisine} {...a11yProps(i)} key={i} />)
+          }
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>

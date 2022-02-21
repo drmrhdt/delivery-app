@@ -15,8 +15,8 @@ function TabPanel(props:any) {
       <div
         role="tabpanel"
         hidden={value !== index}
-        id={`simple-tabpanel-${index}`}
-        aria-labelledby={`simple-tab-${index}`}
+        id={`food-tabpanel-${index}`}
+        aria-labelledby={`food-tab-${index}`}
         {...other}
       >
         {value === index && (
