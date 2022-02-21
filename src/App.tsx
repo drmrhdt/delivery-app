@@ -10,6 +10,14 @@ import TabPanel from "./components/TabPanel";
 import logo from "./assets/logo.svg";
 import "./App.scss";
 
+import { useTheme } from "@mui/material/styles";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import Rating from "@mui/material/Rating";
+
 function App() {
   const [restaurants, setRestaurants] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
@@ -27,7 +35,7 @@ function App() {
   ];
 
   const handleChange = (event: any, newValue: any) => {
-    console.log(newValue);
+    setValue(newValue);
   };
 
   useEffect(() => {
@@ -73,15 +81,58 @@ function App() {
           ))}
         </Tabs>
       </Box>
-      {cuisines.map((cuisine, i) => (
-        <TabPanel value={value} index={i} key={i}>
-          {restaurants.map((r: any) => {
-            if (r.cuisines.includes(cuisines[value])) {
-              return r.name;
-            }
-          })}
-        </TabPanel>
-      ))}
+
+      <Container fixed>
+        {cuisines.map((_, i) => (
+          <TabPanel value={value} index={i} key={i}>
+            {restaurants.map((restaurant: any) => {
+              if (restaurant.cuisines.includes(cuisines[value])) {
+                return (
+                  <Card sx={{ display: "flex",  marginBottom: '15px' }}>
+                    <Box sx={{ display: "flex", flexDirection: "column" }}>
+                      <CardContent sx={{ flex: "1 0 auto" }}>
+                        <Box sx={{ display: "flex", flexDirection: "row" }}>
+                          <CardMedia
+                            component="img"
+                            sx={{ width: 151 }}
+                            image="https://www.globalblue.com/destinations/russia/moscow/article705149.ece/BINARY/yoko_restaurant_teaser.jpg"
+                            alt="Live from space album cover"
+                          />
+                          <Box
+                            sx={{ display: "flex", flexDirection: "column", marginLeft: '10px' }}
+                          >
+                            <Typography component="div" variant="h5">
+                              {restaurant.name}
+                            </Typography>
+                            <Typography
+                              variant="subtitle1"
+                              color="text.secondary"
+                              component="div"
+                            >
+                              {restaurant.cuisines.map(
+                                (cuisine: any, i: number) =>
+                                  cuisine +
+                                  (i === restaurant.cuisines.length - 1
+                                    ? ""
+                                    : ", ")
+                              )}
+                            </Typography>
+                            <Rating
+                              name="read-only"
+                              value={restaurant.averageRating}
+                              readOnly
+                            />
+                          </Box>
+                        </Box>
+                      </CardContent>
+                    </Box>
+                  </Card>
+                );
+              }
+            })}
+          </TabPanel>
+        ))}
+      </Container>
     </div>
   );
 }
