@@ -81,7 +81,11 @@ function App() {
         {cuisines.map((_, i) => (
           <TabPanel value={value} index={i} key={i}>
             {restaurants.map((restaurant: any) => {
-              if (restaurant.cuisines.includes(cuisines[value])) {
+              if (i > 0 && restaurant.cuisines.includes(cuisines[value])) {
+                return (
+                  <RestaurantCard restaurant={restaurant}></RestaurantCard>
+                );
+              } else if (i === 0) {
                 return (
                   <RestaurantCard restaurant={restaurant}></RestaurantCard>
                 );
