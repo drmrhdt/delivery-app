@@ -16,7 +16,7 @@ function RestaurantCard(props: any) {
               <CardMedia
                 component="img"
                 sx={{ width: 151 }}
-                image="https://www.globalblue.com/destinations/russia/moscow/article705149.ece/BINARY/yoko_restaurant_teaser.jpg"
+                image={`https://course-react.javascript.ru${props.restaurant.headerImage}`}
                 alt="Live from space album cover"
               />
               <Box
