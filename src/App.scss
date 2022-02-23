@@ -35,30 +35,6 @@ header {
   }
 }
 
-
-.banner {
-  background: transparent url('assets/header-img.jpg') no-repeat center;
-  background-size: cover;
-
-  &__container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    max-width: 884px;
-    min-height: 220px;
-    margin: 0 auto;
-
-    font-size: 1.1em;
-    color: var(--white);
-  }
-
-  &__logo {
-    margin: 0 0 6px 0;
-  }
-}
-
 .tabs > div > div {
   justify-content: center;
 }

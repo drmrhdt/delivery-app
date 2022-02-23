@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom'
 
 import logo from './assets/logo.svg'
 import './App.scss'
+import Banner from './components/Banner'
 
 function App() {
   return (
@@ -14,12 +15,7 @@ function App() {
           </a>
         </div>
       </header>
-      <div className="banner">
-        <div className="banner__container">
-          <h1 className="banner__logo">Order Food</h1>
-          <b>From 175 Restaurants</b>
-        </div>
-      </div>
+     <Banner></Banner>
       <Outlet />
     </div>
   )
