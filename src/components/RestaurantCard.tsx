@@ -1,10 +1,12 @@
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
-import Rating from "@mui/material/Rating";
-import Box from "@mui/material/Box";
-import { Container } from "@mui/material";
+import {
+  Container,
+  Rating,
+  Box,
+  Typography,
+  CardContent,
+  CardMedia,
+  Card,
+} from "@mui/material";
 
 function RestaurantCard(props: any) {
   return (

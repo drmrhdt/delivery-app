@@ -1,52 +1,63 @@
-import React, { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
-import { Box, Container, Tab, Tabs } from '@mui/material'
+import axios from "axios";
+import {
+  Box,
+  Card,
+  Container,
+  Tab,
+  Tabs,
+  CardContent,
+  ButtonGroup,
+  Button,
+} from "@mui/material";
 
-import Banner from '../components/Banner'
-import TabPanel from '../components/TabPanel'
-import axios from 'axios'
+import classes from "./Restaurant.module.scss";
+
+import Banner from "../components/Banner";
+import TabPanel from "../components/TabPanel";
 
 // https://course-react.javascript.ru/api/reviews?id=a757a0e9-03c1-4a2a-b384-8ac21dbe2fb2
 // https://course-react.javascript.ru/api/users
 
 export default function Restaurant() {
-  const [value, setValue] = React.useState(0)
-  const [menu, setMenu] = React.useState([])
-  const [isLoading, setIsLoading] = React.useState(false)
-  let { id } = useParams()
+  const [value, setValue] = React.useState(0);
+  const [menu, setMenu] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(false);
+  let { id } = useParams();
 
-  const tabs = ['Menu', 'Review']
+  const tabs = ["Menu", "Review"];
 
   useEffect(() => {
-    setIsLoading(true)
-    const apiUrl = `https://course-react.javascript.ru/api/dishes?${id}`
+    setIsLoading(true);
+    const apiUrl = `https://course-react.javascript.ru/api/dishes?${id}`;
     axios.get(apiUrl).then(({ data }) => {
-      setIsLoading(false)
-      setMenu(data)
-    })
-  }, [id])
+      setIsLoading(false);
+      setMenu(data);
+    });
+  }, [id]);
 
   const handleChange = (event: any, newValue: any) => {
-    setValue(newValue)
-  }
+    setValue(newValue);
+  };
 
   const a11yProps = (index: any) => {
     return {
       id: `food-tab-${index}`,
-      'aria-controls': `food-tabpanel-${index}`,
-    }
-  }
+      "aria-controls": `food-tabpanel-${index}`,
+    };
+  };
 
   return (
     <>
       <Banner
-        title={'title'}
-        text={'text'}
-        imgUrl={'https://course-react.javascript.ru/assets/header-img.jpg'}
+        title={"title"}
+        text={"text"}
+        imgUrl={"https://course-react.javascript.ru/assets/header-img.jpg"}
       />
 
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tabs
           value={value}
           onChange={handleChange}
@@ -65,19 +76,51 @@ export default function Restaurant() {
             return (
               <TabPanel value={value} index={i} key={i}>
                 {menu.map((dish: any, i) => (
-                  <div key={i}>{dish.name}</div>
+                  <Card sx={{ display: "flex", marginBottom: "15px" }} key={i}>
+                    <CardContent sx={{ flex: "1 0 auto" }}>
+                      <Box sx={{ display: "flex", flexDirection: "row" }}>
+                        <Box sx={{ display: "flex", flexDirection: "column" }}>
+                          <h4 className={classes.product__title}>
+                            {dish.name}
+                          </h4>
+                          <p className={classes.product__description}>
+                            description
+                          </p>
+                          <p className={classes.product__price}>price</p>
+                        </Box>
+                        <Box
+                          sx={{
+                            display: "flex",
+                            flexDirection: "column",
+                            marginLeft: "auto",
+                          }}
+                        >
+                          <p className={classes.product__count}>count</p>
+                          <Box sx={{ display: "flex", flexDirection: "row" }}>
+                            <ButtonGroup
+                              variant="contained"
+                              aria-label="increase and decrease count buttons"
+                            >
+                              <Button>+</Button>
+                              <Button>-</Button>
+                            </ButtonGroup>
+                          </Box>
+                        </Box>
+                      </Box>
+                    </CardContent>
+                  </Card>
                 ))}
               </TabPanel>
-            )
+            );
           } else if (i === 1) {
             return (
               <TabPanel value={value} index={i} key={i}>
                 reviews
               </TabPanel>
-            )
+            );
           }
         })}
       </Container>
     </>
-  )
+  );
 }
