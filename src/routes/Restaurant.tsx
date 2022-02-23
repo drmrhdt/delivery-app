@@ -75,41 +75,76 @@ export default function Restaurant() {
           if (i === 0) {
             return (
               <TabPanel value={value} index={i} key={i}>
-                {menu.map((dish: any, i) => (
-                  <Card sx={{ display: "flex", marginBottom: "15px" }} key={i}>
-                    <CardContent sx={{ flex: "1 0 auto" }}>
-                      <Box sx={{ display: "flex", flexDirection: "row" }}>
-                        <Box sx={{ display: "flex", flexDirection: "column" }}>
-                          <h4 className={classes.product__title}>
-                            {dish.name}
-                          </h4>
-                          <p className={classes.product__description}>
-                            description
-                          </p>
-                          <p className={classes.product__price}>price</p>
-                        </Box>
-                        <Box
-                          sx={{
-                            display: "flex",
-                            flexDirection: "column",
-                            marginLeft: "auto",
-                          }}
-                        >
-                          <p className={classes.product__count}>count</p>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      width: "60%",
+                    }}
+                  >
+                    {menu.map((dish: any, i) => (
+                      <Card
+                        sx={{ display: "flex", marginBottom: "15px" }}
+                        key={i}
+                      >
+                        <CardContent sx={{ flex: "1 0 auto" }}>
                           <Box sx={{ display: "flex", flexDirection: "row" }}>
-                            <ButtonGroup
-                              variant="contained"
-                              aria-label="increase and decrease count buttons"
+                            <Box
+                              sx={{ display: "flex", flexDirection: "column" }}
                             >
-                              <Button>+</Button>
-                              <Button>-</Button>
-                            </ButtonGroup>
+                              <h4 className={classes.product__title}>
+                                {dish.name}
+                              </h4>
+                              <p className={classes.product__description}>
+                                description
+                              </p>
+                              <p className={classes.product__price}>price</p>
+                            </Box>
+                            <Box
+                              sx={{
+                                display: "flex",
+                                flexDirection: "column",
+                                marginLeft: "auto",
+                              }}
+                            >
+                              <p className={classes.product__count}>count</p>
+                              <Box
+                                sx={{ display: "flex", flexDirection: "row" }}
+                              >
+                                <ButtonGroup
+                                  variant="contained"
+                                  aria-label="increase and decrease count buttons"
+                                >
+                                  <Button>+</Button>
+                                  <Button>-</Button>
+                                </ButtonGroup>
+                              </Box>
+                            </Box>
                           </Box>
-                        </Box>
-                      </Box>
-                    </CardContent>
-                  </Card>
-                ))}
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </Box>
+                  <Box
+                    sx={{
+                      width: "40%",
+                      marginLeft: "10px",
+                      alignSelf: "flex-start",
+                      padding: "20px 16px 20px",
+                      backgroundColor: "#fff0db",
+                    }}
+                  >
+                    <p style={{ textAlign: "center" }}>
+                      <strong>Select a meal from the list</strong>
+                    </p>
+                  </Box>
+                </Box>
               </TabPanel>
             );
           } else if (i === 1) {
