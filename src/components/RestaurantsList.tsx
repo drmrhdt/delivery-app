@@ -1,59 +1,63 @@
-import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 
-import axios from 'axios'
+import axios from "axios";
 
-import Tabs from '@mui/material/Tabs'
-import Tab from '@mui/material/Tab'
-import Box from '@mui/material/Box'
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Box from "@mui/material/Box";
 
-import TabPanel from './TabPanel'
+import TabPanel from "./TabPanel";
 
-import Container from '@mui/material/Container'
-import RestaurantCard from './RestaurantCard'
-import Banner from './Banner';
+import Container from "@mui/material/Container";
+import RestaurantCard from "./RestaurantCard";
+import Banner from "./Banner";
 
 function RestaurantsList(props: any) {
-  const [restaurants, setRestaurants] = React.useState([])
-  const [isLoading, setIsLoading] = React.useState(false)
-  const [value, setValue] = React.useState(0)
+  const [restaurants, setRestaurants] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [value, setValue] = React.useState(0);
 
   const cuisines = [
-    'all',
-    'pizza',
-    'sushi',
-    'vegan',
-    'steak',
-    'asian',
-    'seafood',
-    'pasta',
-  ]
+    "all",
+    "pizza",
+    "sushi",
+    "vegan",
+    "steak",
+    "asian",
+    "seafood",
+    "pasta",
+  ];
 
   const handleChange = (event: any, newValue: any) => {
-    setValue(newValue)
-  }
+    setValue(newValue);
+  };
 
   useEffect(() => {
-    setIsLoading(true)
-    const apiUrl = 'https://course-react.javascript.ru/api/restaurants'
+    setIsLoading(true);
+    const apiUrl = "https://course-react.javascript.ru/api/restaurants";
     axios.get(apiUrl).then(({ data }) => {
-      setIsLoading(false)
-      setRestaurants(data)
-    })
-  }, [])
+      setIsLoading(false);
+      setRestaurants(data);
+    });
+  }, []);
 
   const a11yProps = (index: any) => {
     return {
       id: `food-tab-${index}`,
-      'aria-controls': `food-tabpanel-${index}`,
-    }
-  }
+      "aria-controls": `food-tabpanel-${index}`,
+    };
+  };
 
   return (
     <>
-    <Banner title={'Order Food'} text={'From 175 Restaurants'}></Banner>
-    
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+      <Banner
+        title={"Order Food"}
+        text={"From 175 Restaurants"}
+        imgUrl="https://course-react.javascript.ru/assets/header-img.jpg"
+      ></Banner>
+
+      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tabs
           value={value}
           onChange={handleChange}
@@ -73,22 +77,22 @@ function RestaurantsList(props: any) {
               if (i > 0 && restaurant.cuisines.includes(cuisines[value])) {
                 return (
                   <Link to={`/restaurants/${restaurant.id}`} key={index}>
-                    <RestaurantCard restaurant={restaurant}  />
+                    <RestaurantCard restaurant={restaurant} />
                   </Link>
-                )
+                );
               } else if (i === 0) {
                 return (
                   <Link to={`/restaurants/${restaurant.id}`} key={index}>
-                    <RestaurantCard restaurant={restaurant}  />
+                    <RestaurantCard restaurant={restaurant} />
                   </Link>
-                )
+                );
               }
             })}
           </TabPanel>
         ))}
       </Container>
     </>
-  )
+  );
 }
 
-export default RestaurantsList
+export default RestaurantsList;
