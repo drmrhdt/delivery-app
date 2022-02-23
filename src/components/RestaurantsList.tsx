@@ -11,6 +11,7 @@ import TabPanel from './TabPanel'
 
 import Container from '@mui/material/Container'
 import RestaurantCard from './RestaurantCard'
+import Banner from './Banner';
 
 function RestaurantsList(props: any) {
   const [restaurants, setRestaurants] = React.useState([])
@@ -50,6 +51,8 @@ function RestaurantsList(props: any) {
 
   return (
     <>
+    <Banner title={'Order Food'} text={'From 175 Restaurants'}></Banner>
+    
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs
           value={value}
