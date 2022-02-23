@@ -15,7 +15,7 @@ function App() {
           </a>
         </div>
       </header>
-     <Banner></Banner>
+     <Banner title={'Order Food'} text={'From 175 Restaurants'}></Banner>
       <Outlet />
     </div>
   )
